@@ -41,6 +41,11 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult(intent, NoteAddUpdateActivity.REQUEST_ADD)
         }
 
+        fab_search.setOnClickListener {
+            val intent = Intent(this@MainActivity, SearchActivity::class.java)
+            startActivity(intent)
+        }
+
         noteHelper = NoteHelper.getInstance(applicationContext)
         noteHelper.open()
 
@@ -62,6 +67,7 @@ class MainActivity : AppCompatActivity() {
             when (requestCode) {
                 NoteAddUpdateActivity.REQUEST_ADD -> if (resultCode == NoteAddUpdateActivity.RESULT_ADD) {
                     val note = data.getParcelableExtra<Note>(NoteAddUpdateActivity.EXTRA_NOTE)
+                    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
                     adapter.addItem(note)
                     rv_notes.smoothScrollToPosition(adapter.itemCount - 1)
                     showSnackbarMessage("Satu item berhasil ditambahkan")
@@ -72,6 +78,7 @@ class MainActivity : AppCompatActivity() {
                             .getParcelableExtra<Note>(NoteAddUpdateActivity.EXTRA_NOTE)
                         val position = data
                             .getIntExtra(NoteAddUpdateActivity.EXTRA_POSITION, 0)
+                        @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
                         adapter.updateItem(position, note)
                         rv_notes.smoothScrollToPosition(position)
                         showSnackbarMessage("Satu item berhasil diubah")
