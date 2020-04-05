@@ -1,4 +1,4 @@
-# simple-note-app
+# Simple Notebook
 This a simple android app which can use to make a note.
 This appliaction build using kotlin language with android studio IDE
 
